@@ -46,7 +46,8 @@ public class StudentSolver {
 		Pair tenth_I = new Pair(first,9);
 		input.add(tenth_I);
 		
-		
+		for (Pair<Pair<Double,Double>, Integer> a: input)
+			System.out.println(a);
 
 	}
 
