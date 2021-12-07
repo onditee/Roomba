@@ -5,6 +5,15 @@ public class StudentSolver {
 			Double>, Integer>> mess){
 		
 		ArrayList<Integer> path =new ArrayList<Integer>();
+		ArrayList<Double> xIndexes =new ArrayList<Double>();
+		
+		for(Pair<Pair<Double,Double>, Integer> i: mess) {
+			xIndexes.add((double)i.first.first);
+		}
+		for (double i : xIndexes) {
+			System.out.println(i);
+		}
+		
 		
 		
 		return path;
@@ -48,6 +57,8 @@ public class StudentSolver {
 		
 		for (Pair<Pair<Double,Double>, Integer> a: input)
 			System.out.println(a);
+		
+		run(ratio,input);
 
 	}
 
