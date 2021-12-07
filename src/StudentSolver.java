@@ -1,18 +1,21 @@
 import java.util.ArrayList;
+import java.util.Collections;
 public class StudentSolver {
 	
 	public static ArrayList<Integer> run(double r, ArrayList<Pair<Pair<Double,
 			Double>, Integer>> mess){
 		
 		ArrayList<Integer> path =new ArrayList<Integer>();
-		ArrayList<Double> xIndexes =new ArrayList<Double>();
+		ArrayList<Double> yIndexes =new ArrayList<Double>();
 		
 		for(Pair<Pair<Double,Double>, Integer> i: mess) {
-			xIndexes.add((double)i.first.first);
+			yIndexes.add((double)i.first.second);
 		}
-		for (double i : xIndexes) {
+		for (double i : yIndexes) {
 			System.out.println(i);
 		}
+		double minY = Collections.min(yIndexes);
+		System.out.println("Min Value: "+minY);
 		
 		
 		
