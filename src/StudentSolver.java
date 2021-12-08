@@ -2,21 +2,43 @@ import java.util.ArrayList;
 import java.util.Collections;
 public class StudentSolver {
 	
-	public static ArrayList<Integer> run(double r, ArrayList<Pair<Pair<Double,
-			Double>, Integer>> mess){
+	public static ArrayList<Integer> run(double r, ArrayList<Pair<Pair<Double,Double>, Integer>> mess){
+		final int speed = 100;
+		double horizontalspeed = speed/r;
 		
 		ArrayList<Integer> path =new ArrayList<Integer>();
 		ArrayList<Double> yIndexes =new ArrayList<Double>();
+		ArrayList<Double> xIndexes =new ArrayList<Double>();
+		ArrayList<Pair<Double,Double>> indexes =new ArrayList<Pair<Double,Double>>();
+		
+		for(Pair<Pair<Double,Double>, Integer> i: mess) {
+			indexes.add(new Pair(i.first.first,i.first.second));
+		}
+		for (Pair i : indexes) {
+			System.out.println(i);
+		}
 		
 		for(Pair<Pair<Double,Double>, Integer> i: mess) {
 			yIndexes.add((double)i.first.second);
+			xIndexes.add((double)i.first.first);
 		}
-		for (double i : yIndexes) {
-			System.out.println(i);
+		for (int i=0; i<yIndexes.size(); i++) {
+			System.out.println("X:"+xIndexes.get(i)+" ,Y:"+yIndexes.get(i));
 		}
-		double minY = Collections.min(yIndexes);
-		System.out.println("Min Value: "+minY);
-		
+		double Y1 = Collections.min(yIndexes);
+		System.out.println("Y1 =: "+Y1);
+		int indexY = yIndexes.indexOf(Y1);
+		double X1 = xIndexes.get(indexY);
+		System.out.println("X1 =: "+X1);
+		yIndexes.remove(Y1);
+		xIndexes.remove(X1);
+		double Y2 = Collections.min(yIndexes);
+		System.out.println("Y2 =: "+Y2);
+		indexY = yIndexes.indexOf(Y2);
+		double X2 = xIndexes.get(indexY);
+		System.out.println("X2 =: "+X2);
+		yIndexes.remove(Y2);
+		xIndexes.remove(X2);
 		
 		
 		return path;
