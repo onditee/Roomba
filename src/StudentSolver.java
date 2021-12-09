@@ -5,7 +5,7 @@ public class StudentSolver {
 	public static ArrayList<Integer> run(double r, ArrayList<Pair<Pair<Double,Double>, Integer>> mess){
 		final int speed = 100;
 		double rAngle = Math.toDegrees(Math.atan(r));
-		
+		boolean start =false; 
 		
 		ArrayList<Integer> path =new ArrayList<Integer>();
 		ArrayList<Double> yIndexes =new ArrayList<Double>();
@@ -34,20 +34,38 @@ public class StudentSolver {
 			System.out.println("X:"+xIndexes.get(i)+" ,Y:"+yIndexes.get(i));
 		}
 		
+		
 		// This is for getting X1,x2,Y1,Y2
-		double Y1 = Collections.min(yIndexes);
-		System.out.println();
-		int indexY = yIndexes.indexOf(Y1);
-		double X1 = xIndexes.get(indexY);
-		System.out.println("X1 =: "+X1+" Y1 =: "+Y1);
-		yIndexes.remove(Y1);
-		xIndexes.remove(X1);
-		double Y2 = Collections.min(yIndexes);
-		indexY = yIndexes.indexOf(Y2);
-		double X2 = xIndexes.get(indexY);
-		System.out.println("X2 =: "+X2+" Y2 =: "+Y2);
-		yIndexes.remove(Y2);
-		xIndexes.remove(X2);
+		double Y1,Y2 = 0,X1,X2 =0;
+		int indexY =0;
+		if (start == false) {
+			Y1 = Collections.min(yIndexes);
+			System.out.println();
+			indexY = yIndexes.indexOf(Y1);
+			X1 = xIndexes.get(indexY);
+			System.out.println("X1 =: "+X1+" Y1 =: "+Y1);
+			yIndexes.remove(Y1);
+			xIndexes.remove(X1);
+			Y2 = Collections.min(yIndexes);
+			indexY = yIndexes.indexOf(Y2);
+			X2 = xIndexes.get(indexY);
+			System.out.println("X2 =: "+X2+" Y2 =: "+Y2);
+			yIndexes.remove(Y2);
+			xIndexes.remove(X2);
+			start = true;
+		}
+		else {
+			Y1 =Y2;
+			X1 =X2;
+			Y2 = Collections.min(yIndexes);
+			indexY = yIndexes.indexOf(Y2);
+			yIndexes.remove(Y2);
+			xIndexes.remove(X2);
+			System.out.println("X1 =: "+X1+" Y1 =: "+Y1);
+			System.out.println("X2 =: "+X2+" Y2 =: "+Y2);
+			
+		}
+		
 		
 		double length = X2-X1;
 		double height = Y2-Y1;
@@ -113,3 +131,13 @@ public class StudentSolver {
 	}
 
 }
+
+/*
+ * Y1 = Collections.min(yIndexes); System.out.println(); indexY =
+ * yIndexes.indexOf(Y1); X1 = xIndexes.get(indexY);
+ * System.out.println("X1 =: "+X1+" Y1 =: "+Y1); yIndexes.remove(Y1);
+ * xIndexes.remove(X1); Y2 = Collections.min(yIndexes); indexY =
+ * yIndexes.indexOf(Y2); X2 = xIndexes.get(indexY);
+ * System.out.println("X2 =: "+X2+" Y2 =: "+Y2); yIndexes.remove(Y2);
+ * xIndexes.remove(X2);
+ */
