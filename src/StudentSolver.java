@@ -4,13 +4,21 @@ public class StudentSolver {
 	
 	public static ArrayList<Integer> run(double r, ArrayList<Pair<Pair<Double,Double>, Integer>> mess){
 		final int speed = 100;
-		double horizontalspeed = speed/r;
+		double rAngle = Math.toDegrees(Math.atan(r));
+		
 		
 		ArrayList<Integer> path =new ArrayList<Integer>();
 		ArrayList<Double> yIndexes =new ArrayList<Double>();
 		ArrayList<Double> xIndexes =new ArrayList<Double>();
+		ArrayList<Double> finalIndexes =new ArrayList<Double>();
 		ArrayList<Pair<Double,Double>> indexes =new ArrayList<Pair<Double,Double>>();
+		ArrayList<ArrayList<Integer>> paths =new ArrayList<ArrayList<Integer>>();
 		
+		//Adding the Y indexes for reference 
+		for(Pair<Pair<Double,Double>, Integer> i: mess) {
+			finalIndexes.add((double)i.first.second);
+		}
+		//
 		for(Pair<Pair<Double,Double>, Integer> i: mess) {
 			indexes.add(new Pair(i.first.first,i.first.second));
 		}
@@ -25,21 +33,38 @@ public class StudentSolver {
 		for (int i=0; i<yIndexes.size(); i++) {
 			System.out.println("X:"+xIndexes.get(i)+" ,Y:"+yIndexes.get(i));
 		}
+		
+		// This is for getting X1,x2,Y1,Y2
 		double Y1 = Collections.min(yIndexes);
-		System.out.println("Y1 =: "+Y1);
+		System.out.println();
 		int indexY = yIndexes.indexOf(Y1);
 		double X1 = xIndexes.get(indexY);
-		System.out.println("X1 =: "+X1);
+		System.out.println("X1 =: "+X1+" Y1 =: "+Y1);
 		yIndexes.remove(Y1);
 		xIndexes.remove(X1);
 		double Y2 = Collections.min(yIndexes);
-		System.out.println("Y2 =: "+Y2);
 		indexY = yIndexes.indexOf(Y2);
 		double X2 = xIndexes.get(indexY);
-		System.out.println("X2 =: "+X2);
+		System.out.println("X2 =: "+X2+" Y2 =: "+Y2);
 		yIndexes.remove(Y2);
 		xIndexes.remove(X2);
 		
+		double length = X2-X1;
+		double height = Y2-Y1;
+		
+		double ratio =height/length;
+		
+		double angle = Math.toDegrees(Math.atan(ratio));
+		
+		System.out.println(angle);
+		System.out.println(rAngle);
+		
+		if (angle>=rAngle) {
+			//Will have to check if this is the first time doing a path
+			path.add(finalIndexes.indexOf(Y1));
+			path.add(finalIndexes.indexOf(Y2));
+		}
+		//Loop the code
 		
 		return path;
 	}
@@ -83,7 +108,7 @@ public class StudentSolver {
 		for (Pair<Pair<Double,Double>, Integer> a: input)
 			System.out.println(a);
 		
-		run(ratio,input);
+		System.out.println(run(ratio,input));
 
 	}
 
