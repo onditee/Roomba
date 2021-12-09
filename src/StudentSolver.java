@@ -38,50 +38,58 @@ public class StudentSolver {
 		// This is for getting X1,x2,Y1,Y2
 		double Y1,Y2 = 0,X1,X2 =0;
 		int indexY =0;
-		if (start == false) {
-			Y1 = Collections.min(yIndexes);
-			System.out.println();
-			indexY = yIndexes.indexOf(Y1);
-			X1 = xIndexes.get(indexY);
-			System.out.println("X1 =: "+X1+" Y1 =: "+Y1);
-			yIndexes.remove(Y1);
-			xIndexes.remove(X1);
-			Y2 = Collections.min(yIndexes);
-			indexY = yIndexes.indexOf(Y2);
-			X2 = xIndexes.get(indexY);
-			System.out.println("X2 =: "+X2+" Y2 =: "+Y2);
-			yIndexes.remove(Y2);
-			xIndexes.remove(X2);
-			start = true;
-		}
-		else {
-			Y1 =Y2;
-			X1 =X2;
-			Y2 = Collections.min(yIndexes);
-			indexY = yIndexes.indexOf(Y2);
-			yIndexes.remove(Y2);
-			xIndexes.remove(X2);
-			System.out.println("X1 =: "+X1+" Y1 =: "+Y1);
-			System.out.println("X2 =: "+X2+" Y2 =: "+Y2);
+		boolean exit = false;
+		double maxHeight =Collections.max(yIndexes);
+		while (exit ==false) {
+			if (start == false) {
+				Y1 = Collections.min(yIndexes);
+				System.out.println();
+				indexY = yIndexes.indexOf(Y1);
+				X1 = xIndexes.get(indexY);
+				System.out.println("X1 =: "+X1+" Y1 =: "+Y1);
+				yIndexes.remove(Y1);
+				xIndexes.remove(X1);
+				Y2 = Collections.min(yIndexes);
+				indexY = yIndexes.indexOf(Y2);
+				X2 = xIndexes.get(indexY);
+				System.out.println("X2 =: "+X2+" Y2 =: "+Y2);
+				yIndexes.remove(Y2);
+				xIndexes.remove(X2);
+				start = true;
+			}
+			else {
+				Y1 =Y2;
+				X1 =X2;
+				Y2 = Collections.min(yIndexes);
+				indexY = yIndexes.indexOf(Y2);
+				X2 = xIndexes.get(indexY);
+				yIndexes.remove(Y2);
+				xIndexes.remove(X2);
+				System.out.println("X1 =: "+X1+" Y1 =: "+Y1);
+				System.out.println("X2 =: "+X2+" Y2 =: "+Y2);
+			}
 			
+			
+			double length = X2-X1;
+			double height = Y2-Y1;
+			
+			double ratio =height/length;
+			
+			double angle = Math.toDegrees(Math.atan(ratio));
+			
+			System.out.println(angle);
+			System.out.println(rAngle);
+			
+			if (angle>=rAngle) {
+				//Will have to check if this is the first time doing a path
+				path.add(finalIndexes.indexOf(Y1));
+				path.add(finalIndexes.indexOf(Y2));
+			}
+			if (Y2 == maxHeight) {
+				exit = true;
+			}
 		}
 		
-		
-		double length = X2-X1;
-		double height = Y2-Y1;
-		
-		double ratio =height/length;
-		
-		double angle = Math.toDegrees(Math.atan(ratio));
-		
-		System.out.println(angle);
-		System.out.println(rAngle);
-		
-		if (angle>=rAngle) {
-			//Will have to check if this is the first time doing a path
-			path.add(finalIndexes.indexOf(Y1));
-			path.add(finalIndexes.indexOf(Y2));
-		}
 		//Loop the code
 		
 		return path;
